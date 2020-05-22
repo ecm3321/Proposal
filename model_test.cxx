@@ -1,14 +1,28 @@
 #include "model.hxx"
 #include <catch.hxx>
 
-TEST_CASE("example test (TODO: replace this)")
+using ge211;
+
+TEST_CASE("check board")
 {
-    CHECK( 1 + 1 == 2 );
+    Model m;
+
+    std::vector<Pocket> expected {};
+    CHECK(m.get_pockets() == expected);
 }
 
-//
-// TODO: Write preliminary model tests.
-//
-// These tests should demonstrate at least six of the functional
-// requirements.
-//
+ struct Test_access
+ {
+    Model& model;
+
+    std::vector<Pocket>& pockets()
+    {return model.pockets_;}
+
+     Position& piece()
+     {return model.piece_;}
+ };
+
+TEST_CASE("skip computer ")
+{
+
+}
