@@ -27,3 +27,12 @@ void place_piece(int pocket_num){
         pieces_[pocket_num].pocket = pocket_num;
 }
 
+void Model::play_move(Pocket p)
+{
+    int pocket_num= p.pieces;
+    for(int i=0; i<pocket_num; i++)
+    {
+        pockets_[(p.location+i)%14]+=1;
+    }
+}
+
