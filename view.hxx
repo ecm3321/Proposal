@@ -7,7 +7,7 @@
 
 extern ge211::Color const light_color, dark_color;
 
-ge211::Font sans30_ {"sans.ttf", 30};
+//ge211::Font sans30_ {"sans.ttf", 30};
 
 class View
 {
@@ -32,7 +32,7 @@ private:
     ge211::Circle_sprite const pocket_{pocket_radius, light_color};
     ge211::Rectangle_sprite const source_{store_dims, light_color};
     ge211::Circle_sprite const piece_{piece_radius, dark_color};
-    ge211::Text_sprite store_number_{"Score:", sans30_};
+   // ge211::Text_sprite store_number_{"Score:", sans30_};
    // ge211::Text_sprite pocket_number_{"", ge211::Font{"sans.tff",30}};
 
 };

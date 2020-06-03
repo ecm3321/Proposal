@@ -18,11 +18,10 @@ View::View(Model const& model)
 void View::draw(ge211::Sprite_set& set)
 {
     set.add_sprite(source_, {10,20});
-    set.add_sprite(store_number_, {10,20});
+   // set.add_sprite(store_number_, {10,20});
     set.add_sprite(source_, {initial_window_dimensions().width-store_dims
     .width - 10, 20});
-    set.add_sprite(store_number_, {initial_window_dimensions().width- store_dims
-            .width - 10,20});
+  //  set.add_sprite(store_number_, {initial_window_dimensions().width-store_dims.width - 10,20});
 
     for (int i = 110; i < initial_window_dimensions().width - store_dims.width; i
     = i + 100){

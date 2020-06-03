@@ -5,15 +5,42 @@ using namespace ge211;
 Model::Model(int width, int height)
         : board_({width, height})
 {
-    std::vector<Store> pockets;
+    std::vector<Pocket> pockets;
     {
-        for (int i = 0; i < 13; ++i) {
-            if
-            pockets.push_back({})
+        for (int i = 13; i > 0; --i) {
+            if(i != 0 && i != 7) {
+                pockets.push_back(Pocket{4,i});
+            } else {
+                i = i - 1;
+            }
         }
 
     }
     pockets_ = pockets;
+
+    std::vector<Store> stores;
+    {
+        stores.push_back({Player::player, 0});
+        stores.push_back({Player::computer, 0});
+    }
+    stores_ = stores;
+
+    std::vector<Piece> pieces;
+    {
+        for (int i = 13; i > 0; --i) {
+            if(i != 0 && i != 7) {
+                pieces.push_back(Piece{Player::neither,i});
+                pieces.push_back(Piece{Player::neither,i});
+                pieces.push_back(Piece{Player::neither,i});
+                pieces.push_back(Piece{Player::neither,i});
+            } else {
+                i = i - 1;
+            }
+        }
+
+    }
+    pieces_ = pieces;
+
 }
 
 Rectangle Model::board() const
@@ -21,73 +48,52 @@ Rectangle Model::board() const
     return board_.all_positions();
 }
 
-void place_piece(int pocket_num){
-    pockets_[pocket_num].pieces =  pockets_[pocket_num].pieces + 1;
-    if (pocket_num != 7 && pocket_num != 14)
-        pieces_[pocket_num].pocket = pocket_num;
-}
-
-/*
-void Model::play_move(Pocket p)
-{
-    int pocket_num= p.pieces;
-    for(int i=0; i<pocket_num; i++)
-    {
-        pockets_[(p.location+i)%14]+=1;
-    }
-}
-*/
-
-//formerly play move
-void Model::distribute_tokens(Pocket p, Player player)
-{
-    int pocket_num= p.pieces;
-    for(int i=0; i<=pocket_num; i++)
-    {
-        int temp= (p.location + i)%14;
-        if(player==Player::first) {
-            if(temp !=0 || (temp==0 && i==pocket_num)) {
-                pockets_[temp].pieces += 1;
-            }
-        } else {
-            if(temp !=7 || (temp==7 && i==pocket_num)) {
-                pockets_[temp].pieces += 1;
-            }
-
-
-        }
+void Model::place_piece(int pocket_num){
+    if (pocket_num != 0 && pocket_num != 7) {
+        pockets_[pocket_num].pieces = pockets_[pocket_num].pieces + 1;
+        pieces_[pocket_num].pocket  = pocket_num;
+    } else {
+        if(turn_ == Player::computer)
+            stores_[0].num = stores_[0].num + 1;
+        else
+            stores_[1].num = stores_[1].num + 1;
     }
 }
 
-bool player_wins()
-{
- int total=0;
- for(int i=1; i<=3; i++)
- {
-    total = total + pockets_.pieces;
- }
- for(int j=11; j<=13; j++)
- {
-     total = total + pockets_.pieces;
- }
- return total == 0;
- //winner_=Player::computer;
+ge211::Dimensions Model::get_dims() const{
+    return board_.dimensions();
 }
 
-bool computer_wins()
-{
-    int total=0;
-    for(int i=4; i<=6; i++)
-    {
-        total = total + pockets_.pieces;
-    }
-    for(int j=8; j<=10; j++)
-    {
-        total = total + pockets_.pieces;
-    }
-    return total == 0;
-    //winner_=Player::computer;
+void Model::change_player(){
+    if(turn_ == Player::computer)
+        turn_ = Player::player;
+    if(turn_ == Player::player)
+        turn_ = Player::computer;
 }
 
+bool Model::half_empty(){
+    int sum = 0;
+    if(pockets_[1].pieces == 0 && pockets_[2].pieces == 0 &&
+            pockets_[3].pieces == 0 && pockets_[10].pieces == 0 &&
+            pockets_[11].pieces == 0 && pockets_[12].pieces == 0){
+        return true;
+    }
+    if(pockets_[4].pieces == 0 && pockets_[5].pieces == 0 &&
+       pockets_[6].pieces == 0 && pockets_[8].pieces == 0 &&
+       pockets_[9].pieces == 0 && pockets_[10].pieces == 0){
+        return true;
+    }
+    return false;
+}
 
+void Model::update_pocket(){
+    //TODO
+}
 
+void Model::update_store_box(){
+    //TODO
+}
+
+void Model::take_for_store(){
+    //TODO
+}
