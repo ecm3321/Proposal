@@ -15,17 +15,26 @@ View::View(Model const& model)
         : model_(model)
 { }
 
-void View::draw(ge211::Sprite_set& set, Model const& model)
+void View::draw(ge211::Sprite_set& set)
 {
-    set.add_sprite(source_, {10,10});
-    set.add_sprite(store_number_, {10,10}));
-    set.add_sprite(source_, {10, model.get_dims().width});
+    set.add_sprite(source_, {10,20});
+    set.add_sprite(store_number_, {10,20});
+    set.add_sprite(source_, {initial_window_dimensions().width-store_dims
+    .width - 10, 20});
+    set.add_sprite(store_number_, {initial_window_dimensions().width- store_dims
+            .width - 10,20});
 
-    for (int i = store_dims.width; i < 6; i = i + store_dims.width/8){
-        for (int j = store_dims.height; j < 2; j = j + store_dims.height/2){
-            set.add_sprite(pocket_, {i + 10,j + 10});
-            set.add_sprite(pocket_number_, {i + 10,j + 10});
+    for (int i = 110; i < initial_window_dimensions().width - store_dims.width; i
+    = i + 100){
+        for (int j = 20; j < initial_window_dimensions().height; j = j + 130){
+            set.add_sprite(pocket_, {i,j});
+            //set.add_sprite(pocket_number_, {i + 10,j + 10});
             set.add_sprite(piece_, {i,j});
         }
     }
+}
+
+Dimensions View::initial_window_dimensions() const
+{
+    return {800, 250};
 }
