@@ -7,17 +7,16 @@ Model::Model(int width, int height)
 {
     std::vector<Pocket> pockets;
     {
-        for (int i = 13; i > 0; --i) {
+        for (int i = 13; i >= 0; --i) {
             pockets.push_back(Pocket{4,i});
         }
 
     }
     pockets_ = pockets;
 
-
     std::vector<Piece> pieces;
     {
-        for (int i = 13; i > 0; --i) {
+        for (int i = 13; i >= 0; --i) {
             if(i != 0 && i != 7) {
                 pieces.push_back(Piece{Player::neither,i});
                 pieces.push_back(Piece{Player::neither,i});
@@ -64,9 +63,9 @@ bool Model::half_empty(){
     return false;
 }
 
-int Model::update_pocket(Pocket pock){
+void Model::update_pocket(Pocket pock){
     int pock_num = pock.num;
-    if(pock.pieces = 0) pock_num;
+    if(pock.pieces = 0) return;
 
     for (int i = pock.pieces; i > 0; i = i - 1){
         if(turn_ == Player::computer && i == 0)
@@ -78,6 +77,7 @@ int Model::update_pocket(Pocket pock){
         pockets_[pock_num].pieces = pockets_[pock_num].pieces + 1;
         pock_num = pock_num + 1;
     }
+    pock.pieces = 0;
 }
 
 void Model::update_store_box(){

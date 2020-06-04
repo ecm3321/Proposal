@@ -80,8 +80,8 @@ public:
     // Returns if half the board is empty
     bool half_empty();
 
-    // Updates the number of pieces in a pocket and returns the last pocket
-    int update_pocket(Pocket);
+    // Updates the number of pieces in a pocket
+    void update_pocket(Pocket);
 
 private:
 

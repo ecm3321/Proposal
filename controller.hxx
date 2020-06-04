@@ -17,6 +17,8 @@ protected:
     // These three delegate to the view:
     void draw(ge211::Sprite_set&) override;
     ge211::Dimensions initial_window_dimensions() const override;
+    void on_mouse_down(ge211::Mouse_button, ge211::Position);
+
 
 private:
     Model            model_;
