@@ -7,12 +7,14 @@
 
 extern ge211::Color const light_color, dark_color;
 
-//ge211::Font sans30_ {"sans.ttf", 30};
-
 class View
 {
 public:
     explicit View(Model const&);
+
+    ge211::Font const sans30_{"sans.ttf", 30};
+    ge211::Font const sans15_{"sans.ttf", 15};
+
 
     // You will probably want to add arguments here so that the
     // controller can communicate UI state (such as a mouse or
@@ -26,13 +28,21 @@ public:
     //void move_piece_(ge211::Sprite_set&, Player, ge211::Position, int) const;
 
 private:
+
+    void update_store_number_(int);
+    void update_pocket_number_(int);
+    int cached_val_pock = 0;
+    int cached_val_stor = 0;
+
     Model const& model_;
 
 
     ge211::Circle_sprite const pocket_{pocket_radius, light_color};
     ge211::Rectangle_sprite const source_{store_dims, light_color};
     ge211::Circle_sprite const piece_{piece_radius, dark_color};
-   // ge211::Text_sprite store_number_{"Score:", sans30_};
-   // ge211::Text_sprite pocket_number_{"", ge211::Font{"sans.tff",30}};
+    ge211::Text_sprite store_number_ = ge211::Text_sprite("0",sans30_);
+    ge211::Text_sprite pocket_number_ = ge211::Text_sprite{"0", sans15_};
+
+
 
 };

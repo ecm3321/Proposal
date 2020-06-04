@@ -8,6 +8,7 @@ class Controller : public ge211::Abstract_game
 {
 public:
     Controller(int width, int height);
+    //ge211::Font const sans30_{"sans.ttf", 30};
 
 protected:
     //void on_mouse_down(ge211::Mouse_button, ge211::Position) override;

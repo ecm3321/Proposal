@@ -8,7 +8,7 @@
 // Model constants:
 //
 
-const int piece_radius = 10;
+const int piece_radius = 15;
 const int pocket_radius = 40;
 const ge211::Dimensions store_dims = {80,210};
 
@@ -41,21 +41,12 @@ struct Piece
     int pocket;
 };
 
-struct Store
-{
-    // Which player the store belongs to
-    Player player;
-
-    // Number of pieces in store
-    int num;
-};
 
 //The whole state of the game.
 class Model
 {
 public:
 
-    std::vector<Store> stores_;
     std::vector<Piece> pieces_;
     std::vector<Pocket> pockets_;
 
@@ -69,9 +60,6 @@ public:
     // Returns a rectangle containing all the positions of the board.
     // This can be used to iterate over the positions.
     ge211::Rectangle board() const;
-
-    // Puts a piece in a pocket
-    void place_piece(int);
 
     // Returns the dimensions of the board
     ge211::Dimensions get_dims() const;
@@ -92,6 +80,9 @@ public:
     // Returns if half the board is empty
     bool half_empty();
 
+    // Updates the number of pieces in a pocket and returns the last pocket
+    int update_pocket(Pocket);
+
 private:
 
     // The current turn
@@ -105,8 +96,7 @@ private:
     // POSSIBLE HELPER FUNCTIONS
     //
 
-    // Updates the number of pieces in a pocket
-    void update_pocket();
+
 
     // Updates the store box
     void update_store_box();

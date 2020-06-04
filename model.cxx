@@ -8,22 +8,12 @@ Model::Model(int width, int height)
     std::vector<Pocket> pockets;
     {
         for (int i = 13; i > 0; --i) {
-            if(i != 0 && i != 7) {
-                pockets.push_back(Pocket{4,i});
-            } else {
-                i = i - 1;
-            }
+            pockets.push_back(Pocket{4,i});
         }
 
     }
     pockets_ = pockets;
 
-    std::vector<Store> stores;
-    {
-        stores.push_back({Player::player, 0});
-        stores.push_back({Player::computer, 0});
-    }
-    stores_ = stores;
 
     std::vector<Piece> pieces;
     {
@@ -46,18 +36,6 @@ Model::Model(int width, int height)
 Rectangle Model::board() const
 {
     return board_.all_positions();
-}
-
-void Model::place_piece(int pocket_num){
-    if (pocket_num != 0 && pocket_num != 7) {
-        pockets_[pocket_num].pieces = pockets_[pocket_num].pieces + 1;
-        pieces_[pocket_num].pocket  = pocket_num;
-    } else {
-        if(turn_ == Player::computer)
-            stores_[0].num = stores_[0].num + 1;
-        else
-            stores_[1].num = stores_[1].num + 1;
-    }
 }
 
 ge211::Dimensions Model::get_dims() const{
@@ -86,8 +64,20 @@ bool Model::half_empty(){
     return false;
 }
 
-void Model::update_pocket(){
-    //TODO
+int Model::update_pocket(Pocket pock){
+    int pock_num = pock.num;
+    if(pock.pieces = 0) pock_num;
+
+    for (int i = pock.pieces; i > 0; i = i - 1){
+        if(turn_ == Player::computer && i == 0)
+            i = i + 1;
+        if(turn_ == Player::player && i == 7)
+            i = i + 1;
+        if(pock_num = 13 && i != 0)
+            pock_num = 0;
+        pockets_[pock_num].pieces = pockets_[pock_num].pieces + 1;
+        pock_num = pock_num + 1;
+    }
 }
 
 void Model::update_store_box(){
