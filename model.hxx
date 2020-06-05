@@ -24,7 +24,6 @@ struct Pocket
 
     // Number of pieces in the pocket
     int pieces;
-
 };
 
 enum class Player
@@ -32,22 +31,11 @@ enum class Player
     player, computer, neither
 };
 
-struct Piece
-{
-    // Which player the piece belongs to if any
-    Player player;
-
-    //number of the pocket of the piece, 0 if in a store
-    int pocket;
-};
-
-
 //The whole state of the game.
 class Model
 {
 public:
 
-    std::vector<Piece> pieces_;
     std::vector<Pocket> pockets_;
 
     //
@@ -81,7 +69,7 @@ public:
     bool half_empty();
 
     // Updates the number of pieces in a pocket
-    void update_pocket(Pocket);
+    void update_pocket(int);
 
 private:
 
@@ -96,14 +84,9 @@ private:
     // POSSIBLE HELPER FUNCTIONS
     //
 
+    bool is_valid_pocket(int);
 
-
-    // Updates the store box
-    void update_store_box();
-
-    // Takes pieces from opposite pocket if last piece placed in empty
-    // pocket and puts them in the player's store
-    void take_for_store();
+    int get_oppsite_pocket(int);
 
     // Test access
     friend struct Test_access;

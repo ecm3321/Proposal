@@ -10,20 +10,23 @@ extern ge211::Color const light_color, dark_color;
 class View
 {
 public:
-    explicit View(Model const&);
+    explicit View(Model&);
 
     ge211::Font const sans30_{"sans.ttf", 30};
     ge211::Font const sans15_{"sans.ttf", 15};
+    ge211::Font const sans10_{"sans.ttf", 13};
 
 
     // You will probably want to add arguments here so that the
     // controller can communicate UI state (such as a mouse or
     // cursor position):
-    void draw(ge211::Sprite_set&);
+    void draw(ge211::Sprite_set&, ge211::Position);
 
     ge211::Dimensions initial_window_dimensions() const;
 
     ge211::Position board_to_screen_(int) const;
+
+    //Returns 20 if a pocket is not selected
     int screen_to_board(ge211 :: Position) const;
 
     void update_store_number_(int, int);
@@ -36,7 +39,6 @@ public:
 
 private:
     Model const& model_;
-
 
     ge211::Circle_sprite const pocket_{pocket_radius, light_color};
     ge211::Rectangle_sprite const source_{store_dims, light_color};
@@ -56,6 +58,6 @@ private:
     ge211::Text_sprite pocket_number_12 = ge211::Text_sprite{"4", sans15_};
     ge211::Text_sprite pocket_number_13 = ge211::Text_sprite{"4", sans15_};
 
-
-
+    ge211::Text_sprite player_1 = ge211::Text_sprite{"PLAYER", sans10_};
+    ge211::Text_sprite computer_1 = ge211::Text_sprite{"COMPUTER", sans10_};
 };

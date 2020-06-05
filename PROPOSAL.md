@@ -37,7 +37,7 @@ on either side.
 
 3. The player moves the pieces to another pocket by clicking on the pocket.
 
-4. if the player does not click on a pocket, nothing happens. 
+4. The number of pieces in any pocket as a text sprite right next to it. 
 
 5. The player cannot move the pieces to a pocket if it is not in the 
 counter-clockwise direction. 
@@ -45,20 +45,15 @@ counter-clockwise direction.
 6. The player cannot put pieces in the computer's store and the computer cannot
 put pieces in the players store. 
 
-7. The player's store is treated as one of their pockets and the computer's 
-store is treated as one of their pockets. 
-
-8. Pieces cannot be removed from a store. 
-
-9. If a player places their last piece in an empty pocket, that piece and any 
+7. If a player places their last piece in an empty pocket, that piece and any 
 pieces from the opposite pocket are move to their store.
 
-10. If a play places their last piece in their own store, they take another
+8. If a play places their last piece in their own store, they take another
 turn.
 
-11. The computer always makes the best move.
+9. The computer always makes the best move.
 
-12. If one side of the board is empty, the game ends and the winner is 
+10. If one side of the board is empty, the game ends and the winner is 
 determined by counting the number of pieces in each player's store. 
 
 
