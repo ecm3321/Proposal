@@ -7,7 +7,7 @@ using Position   = ge211::Position;
 using Color      = ge211::Color;
 using Sprite_set = ge211::Sprite_set;
 
- Color const dark_color {3, 252, 123};
+ Color const dark_color {150, 30, 123};
  Color const light_color {3, 161, 252};
 
 
@@ -75,9 +75,12 @@ void View::draw(ge211::Sprite_set& set, ge211::Position mouse)
     //Mouse shows whose turn
     if (model_.turn() == Player::player){
         set.add_sprite(player_1, mouse, 20);
-    } else if (model_.turn() == Player::computer){
+    }
+    if (model_.turn() == Player::computer){
         set.add_sprite(computer_1, mouse, 20);
     }
+
+
 }
 
 Dimensions View::initial_window_dimensions() const

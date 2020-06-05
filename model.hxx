@@ -53,14 +53,10 @@ public:
     ge211::Dimensions get_dims() const;
 
     // Returns whose turn it is, or Player::neither for game over.
-    Player turn() const { return turn_; };
+    Player turn() { return turn_; };
 
     //Returns the winning player
     Player winner() const { return winner_; };
-
-    // returns whether the game is over.
-    bool game_is_finsihed() const
-    { return turn() == Player::neither; }
 
     //Updates the model status
     void change_player();

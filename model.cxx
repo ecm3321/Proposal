@@ -28,17 +28,21 @@ ge211::Dimensions Model::get_dims() const{
 }
 
 void Model::change_player(){
-    if(turn_ == Player::computer)
+    if(turn_ == Player::computer) {
         turn_ = Player::player;
-    if(turn_ == Player::player)
+        return;
+    }
+    if(turn_ == Player::player) {
         turn_ = Player::computer;
+        return;
+    }
 }
 
 bool Model::half_empty(){
     int sum = 0;
     if(pockets_[1].pieces == 0 && pockets_[2].pieces == 0 &&
-            pockets_[3].pieces == 0 && pockets_[10].pieces == 0 &&
-            pockets_[11].pieces == 0 && pockets_[12].pieces == 0){
+            pockets_[3].pieces == 0 && pockets_[11].pieces == 0 &&
+            pockets_[12].pieces == 0 && pockets_[13].pieces == 0){
         return true;
     }
     if(pockets_[4].pieces == 0 && pockets_[5].pieces == 0 &&
@@ -53,13 +57,16 @@ void Model::update_pocket(int pock){
     int pock_num = pock;
     if(pockets_[pock].pieces == 0) return;
     if(!is_valid_pocket(pock)) return;
+
     int last_;
     int last_num;
     int init = pockets_[pock].pieces;
+
     pockets_[pock].pieces = 0;
     for (int i = init; i > 0; i = i - 1) {
         if(i == 1) {
-            last_ = pock_num;
+            last_ = pock_num + 1;
+            if(last_ == 14) last_ = 0;
             std::cout<<last_;
             last_num = pockets_[last_].pieces;
         }
@@ -90,9 +97,18 @@ void Model::update_pocket(int pock){
         pockets_[other].pieces = 0;
         pockets_[last_].pieces = 0;
     }
-    if ((turn_ == Player::player && last_ != 0)
-    || (turn_ == Player::computer && last_ != 7)) {
+
+    if (turn_ == Player::player && last_ != 0)
         change_player();
+    else if (turn_ == Player::computer && last_ != 7)
+        change_player();
+
+    if(half_empty()){
+        turn_ = Player::neither;
+        if (pockets_[0].pieces > pockets_[7].pieces)
+            winner_ = Player::player;
+        else
+            winner_ = Player::computer;
     }
 
 }

@@ -38,7 +38,7 @@ public:
     //void move_piece_(ge211::Sprite_set&, Player, ge211::Position, int) const;
 
 private:
-    Model const& model_;
+    Model& model_;
 
     ge211::Circle_sprite const pocket_{pocket_radius, light_color};
     ge211::Rectangle_sprite const source_{store_dims, light_color};
@@ -60,4 +60,5 @@ private:
 
     ge211::Text_sprite player_1 = ge211::Text_sprite{"PLAYER", sans10_};
     ge211::Text_sprite computer_1 = ge211::Text_sprite{"COMPUTER", sans10_};
+
 };

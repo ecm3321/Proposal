@@ -9,6 +9,14 @@ void Controller::draw(ge211::Sprite_set& sprites)
 {
     view_.draw(sprites, mouse_);
 
+    //Shows winner
+    if (model_.half_empty() && model_.winner() == Player::player){
+        sprites.add_sprite(player_2, {350, 100},30);
+    }
+    if (model_.half_empty() && model_.winner() == Player::computer) {
+        sprites.add_sprite(computer_2, {350, 100},30);
+    }
+
 }
 
 ge211::Dimensions Controller::initial_window_dimensions() const

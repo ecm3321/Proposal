@@ -9,6 +9,8 @@ public:
     Controller(int width, int height);
     ge211::Position mouse_ = {0,0};
 
+    ge211::Font const sans30_{"sans.ttf", 30};
+
 protected:
 
     void draw(ge211::Sprite_set&) override;
@@ -19,5 +21,6 @@ protected:
 private:
     Model            model_;
     View             view_;
-
+    ge211::Text_sprite player_2 = ge211::Text_sprite{"PLAYER", sans30_};
+    ge211::Text_sprite computer_2 = ge211::Text_sprite{"COMPUTER", sans30_};
 };
